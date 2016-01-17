@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
@@ -28,8 +30,24 @@ public class Ch5Main {
                 new Transaction(alan, 2012, 950)
         );
 
-        problem8
+        //pythagoreanTriple();
+        fibo();
+    }
 
+    public static void fibo() {
+        Stream.iterate(new int[]{0,1}, n -> new int[]{n[1], n[0]+n[1]} )
+                .limit(20)
+                .forEach( a -> System.out.println(a[0] + ", " + a[1]));
+    }
+
+    public static void pythagoreanTriple() {
+        IntStream.range(1,100).boxed()
+                .flatMap(
+                        a -> IntStream.range(a,100)
+                            .mapToObj(b -> new double[]{a, b, Math.sqrt(a*a + b*b)})
+
+                ).filter( tri -> tri[2] % 1 == 0 )
+                .forEach( tri -> System.out.println(tri[0]+" "+ tri[1]+" "+tri[2]));
     }
 
     public static void problem1(List<Transaction> transactions) {
