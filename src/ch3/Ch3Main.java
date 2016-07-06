@@ -7,8 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.DoubleFunction;
 import java.util.function.Function;
 
 /**
@@ -40,12 +42,20 @@ public class Ch3Main {
         Function<String, String> transformationPipeline = Letter::addHeader;
         transformationPipeline.andThen(Letter::addFooter);
 
+        inventory.sort(Comparator.comparing(Apple::getWeight).reversed().thenComparing(Apple::getColor));
+
+        System.out.println(integrate( (double a) -> a+2, 3.0, 7.0) );
+    }
+
+    public static double integrate(DoubleFunction<Double> f, double a, double b) {
+        return f.apply(a) + f.apply(b) / (b-a) / 2;
     }
 
     public static void lambdaReference() {
         List<String> str = Arrays.asList("a","b","A", "B");
         str.sort(String::compareToIgnoreCase);
         System.out.println(str);
+
     }
 
     public static <T,R> List<R> map(List<T> list, Function<T,R> f) {

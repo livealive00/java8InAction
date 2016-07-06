@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * Created by SungHyun Park on 2016-01-14.
  */
@@ -31,8 +33,15 @@ public class Ch1Main {
         System.out.println(evenNumbers);
 
         //prettyPrintApple(inventory, new AppleSimpleFormatter());
+        inventory.stream().filter((Apple a) -> a.getColor().equals("red")).collect(toList());
+        inventory.forEach( (Apple a) -> System.out.println(a.getColor()) );
+
+        String[] strArr = new String[]{"ab", "bccc", "c"};
+
 
     }
+
+
 
     public static <T> List<T> filter(List<T> list, Predicate<T> p) {
         List<T> result = new ArrayList<T>();

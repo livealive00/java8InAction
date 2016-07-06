@@ -42,6 +42,9 @@ public class Ch4Main {
         // reduce
         //int sum = Arrays.asList(1,2,3).stream().reduce(0, Integer::sum);
         //System.out.println(sum);
+
+        String[] strArr = {"A", "BB", "abcd"};
+        int res = Arrays.stream(strArr).mapToInt( s -> s.length() ).max().orElse(0);
     }
 
     public static List<int[]> mappingExample2(List<Integer> numbers1, List<Integer> numbers2) {
