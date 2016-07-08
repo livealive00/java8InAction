@@ -23,16 +23,26 @@ public class WordCounterSpliterator implements Spliterator<Character> {
 
     @Override
     public Spliterator<Character> trySplit() {
+        int currentSize = string.length() - currentChar;
+        if(currentSize < 10) {
+            return null;
+        }
+        for(int splitPos = currentSize / 2 + currentChar; splitPos<string.length(); splitPos++) {
+            if (Character.isWhitespace(string.charAt(splitPos))) {
+                currentChar = splitPos;
+                return new WordCounterSpliterator(string.substring(currentChar, splitPos));
+            }
+        }
         return null;
     }
 
     @Override
     public long estimateSize() {
-        return 0;
+        return string.length() - currentChar;
     }
 
     @Override
     public int characteristics() {
-        return 0;
+        return ORDERED + SIZED + SUBSIZED + NONNULL + IMMUTABLE;
     }
 }
